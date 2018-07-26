@@ -18,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,7 +30,7 @@ public class FUaTestList {
 	public static void setUpBeforeClass() throws Exception {
 		//System.setProperty("webdriver.opera.driver", "D:\\QA\\Selenium\\operadriver_win64\\operadriver.exe");
 		//OperaOptions options = new OperaOptions(); 
-		//options.setBinary("C:\\\\Users\\\\Lenovo\\\\AppData\\\\Local\\\\Programs\\\\Opera\\\\54.0.2952.41\\\\opera.exe"); // указать путь установки Оперы
+		//options.setBinary("C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Opera\\54.0.2952.60");
 		//driver = new OperaDriver(options); 
 		
 		//System.setProperty("webdriver.gecko.driver", "D:\\QA\\Selenium\\geckodriver.exe"); 
@@ -70,7 +71,7 @@ public class FUaTestList {
 			driver.findElement(By.linkText("Смартфон SAMSUNG Galaxy J7 J710F/DS")).click();
 			driver.findElement(By.xpath("//li[@class='compare']/a")).click(); // сравнение
 			
-			driver.findElement(By.xpath("//div[@class='buy_button']/a[@class='btn btn-large btn-green with-icon add2cart_4726511 btn-green']")).click();
+			driver.findElement(By.xpath("//div[@class='buy_button']/a[@class='btn btn-large btn-green with-icon add2cart_4726511 btn-green']")).click(); // добавление в корзину
 			String parentWindow3 = driver.getWindowHandle();
 			Set<String> allPopupWindows3 = driver.getWindowHandles();
 			for (String popupWindow3 : allPopupWindows3) {
@@ -79,8 +80,8 @@ public class FUaTestList {
 		    driver.switchTo().window(parentWindow3);
 		    			
 			driver.findElement(By.xpath("//input[@type='search'][@name='qr']")).sendKeys("Samsung galaxy S9");
-			//WebDriverWait wait11 = new WebDriverWait(driver, 5);
-			//wait11
+			WebDriverWait wait11 = new WebDriverWait(driver, 10);
+			wait11.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@class='btn btn-right'][@type='submit']"))));
 			
 			driver.findElement(By.id("head_search_form")).findElement(By.tagName("input")).click();
 			driver.findElement(By.linkText("Мобильные телефоны")).click();
